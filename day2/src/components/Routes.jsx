@@ -3,15 +3,19 @@ import Home from '../pages/Home'
 import Jewelery from '../pages/Jewelery'
 import Electronics from '../pages/Electronics'
 import { Routes, Route } from 'react-router-dom'
-function Routes() {
+import Details from '../pages/Details'
+import Buy from '../pages/Buy'
+function AllRoutes() {
     return (
 
         <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/Jewelery' element={<Jewelery />} />
-            <Route path='/Electronics' element={<Electronics />} />
+            <Route path='/:id' element={<Details />} />\
+            <Route path='/:id/:key' element={<Buy />} />
+            <Route path='/jewelery' element={<Jewelery />} />
+            <Route path='/electronics' element={<Electronics />} />
         </Routes>
     )
 }
 
-export default Routes
+export default AllRoutes;

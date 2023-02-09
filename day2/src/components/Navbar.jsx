@@ -20,21 +20,27 @@ export default function Navbar(props) {
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', backgroundColor: 'rgb(25 118 210)' }}>
-            <Typography variant="h6" sx={{ my: 2 }}>
-                SecondDay
-            </Typography>
+            <Link to='/'>
+                <Typography variant="h6" sx={{ my: 2 }}>
+                    SecondDay
+                </Typography>
+            </Link>
+
             <Divider />
 
 
-            {/* <Link to='/'> */}
-            <Button sx={{ color: '#fff' }}>
-                Electonics
-            </Button> <br />
-            {/* </Link> */}
-
-            <Button sx={{ color: '#fff' }}>
-                Jewelery
-            </Button>
+            <>
+                <Link to='/electronics'>
+                    <Button sx={{ color: '#fff' }}>
+                        Electonics
+                    </Button>
+                </Link>
+                <Link to='/jewelery'>
+                    <Button sx={{ color: '#fff' }}>
+                        Jewelery
+                    </Button>
+                </Link>
+            </>
 
         </Box>
     );
@@ -61,17 +67,19 @@ export default function Navbar(props) {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-                        SecondDay
+                        <Link to='/' style={{ fontSize: '30px', fontStyle: 'italic', fontWeight: 'bold' }}>
+                            SecondDay
+                        </Link>
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {/* {navItems.map((item) => ( */}
                         <>
-                            <Link to='/Electronics'>
+                            <Link to='/electronics'>
                                 <Button sx={{ color: '#fff' }}>
                                     Electonics
                                 </Button>
                             </Link>
-                            <Link to='/Jewelery'>
+                            <Link to='/jewelery'>
                                 <Button sx={{ color: '#fff' }}>
                                     Jewelery
                                 </Button>

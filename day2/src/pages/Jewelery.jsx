@@ -4,11 +4,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 export default function Electronics() {
     const [prod, setProd] = React.useState([]);
     React.useEffect(() => {
-        fetch('https://fakestoreapi.com/products/categories/jewelery')
+        fetch('https://fakestoreapi.com/products/category/jewelery')
             .then(res => res.json())
             .then(json => setProd(json))
     }, [])
@@ -48,9 +49,11 @@ export default function Electronics() {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" color="primary">
-                            know more...
-                        </Button>
+                        <Link to={`/${e.id}`}>
+                            <Button size="small" color="primary">
+                                know more...
+                            </Button>
+                        </Link>
                     </CardActions>
                 </Card>
             ))}
