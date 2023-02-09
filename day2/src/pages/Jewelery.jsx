@@ -5,10 +5,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import styled from 'styled-components'
-export default function Cards() {
+export default function Electronics() {
     const [prod, setProd] = React.useState([]);
     React.useEffect(() => {
-        fetch('https://fakestoreapi.com/products')
+        fetch('https://fakestoreapi.com/products/categories/jewelery')
             .then(res => res.json())
             .then(json => setProd(json))
     }, [])
@@ -20,7 +20,7 @@ export default function Cards() {
     // background: papayawhip;
     // border: 1px solid red;
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(3,1fr);
     gap:20px
   `;
 
@@ -48,7 +48,6 @@ export default function Cards() {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-
                         <Button size="small" color="primary">
                             know more...
                         </Button>
