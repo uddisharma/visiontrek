@@ -1,0 +1,47 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Taj Mahal",
+      "location":"Agra",
+      "photo":"https://www.planetware.com/wpimages/2020/01/india-in-pictures-beautiful-places-to-photograph-taj-mahal.jpg",
+      "description":"Welcome to Taj Mahal, Standing majestically on the banks of River Yamuna. Taj Mahal Taj Mahal is famous for Own beauty and one of the wonders of the world. Welcome to Taj Mahal, Standing majestically on the banks of River Yamuna. Taj Mahal Taj Mahal is famous for Own beauty and one of the wonders of the world.Welcome to Taj Mahal, Standing majestically on the banks of River Yamuna. Taj Mahal Taj Mahal is famous for Own beauty and one of the wonders of the world."
+      
+    },
+    {
+      "id": 2,
+      "title": "Kapaleeshwarar",
+      "location":"Chennai",
+      "photo":"https://www.planetware.com/wpimages/2020/01/india-in-pictures-beautiful-places-to-photograph-kapaleeshwarar-temple.jpg",
+      "description":"Kapaleeshwarar Temple is a Hindu temple dedicated to lord Shiva located in Mylapore, Chennai in the Indian state of Tamil Nadu. The form of Shiva's consortKapaleeshwarar Temple is a Hindu temple dedicated to lord Shiva located in Mylapore, Chennai in the Indian state of Tamil Nadu. The form of Shiva's consortKapaleeshwarar Temple is a Hindu temple dedicated to lord Shiva located in Mylapore, Chennai in the Indian state of Tamil Nadu. The form of Shiva's consort ..."
+    },
+    {
+      "id": 3,
+      "title": "The Gateway of India",
+      "location":"Mumbai",
+      "photo":"https://www.planetware.com/wpimages/2020/01/india-in-pictures-beautiful-places-to-photograph-gateway-of-india-mumbai.jpg",
+      "description":"The Gateway of India is an arch-monument built in the early 20th century in the city of Mumbai (Bombay), India. It was erected to commemorate the landing ofKapaleeshwarar Temple is a Hindu temple dedicated to lord Shiva located in Mylapore, Chennai in the Indian state of Tamil Nadu. The form of Shiva's consortKapaleeshwarar Temple is a Hindu temple dedicated to lord Shiva located in Mylapore, Chennai in the Indian state of Tamil Nadu. The form of Shiva's consort ..."
+    },
+    {
+      "id": 4,
+      "title": "Cola Beach ",
+      "location":"Goa",
+      "photo":"https://www.planetware.com/wpimages/2020/01/india-in-pictures-beautiful-places-to-photograph-cola-beach-goa.jpg",
+      "description":"With contemporary amenities, ultimate comfort and luxury, Rahi Coral Beach Resort delivers an ideal tropical vacation surrounded by sky-high palm trees.Kapaleeshwarar Temple is a Hindu temple dedicated to lord Shiva located in Mylapore, Chennai in the Indian state of Tamil Nadu. The form of Shiva's consortKapaleeshwarar Temple is a Hindu temple dedicated to lord Shiva located in Mylapore, Chennai in the Indian state of Tamil Nadu. The form of Shiva's consort"
+    },
+    {
+      "id": 5,
+      "title": "Shimla hills",
+      "location":"Shimla",
+      "photo":"https://www.planetware.com/wpimages/2020/01/india-in-pictures-beautiful-places-to-photograph-train-rides.jpg",
+      "description":"The Kalka–Shimla Railway is a 2 ft 6 in narrow-gauge railway in North India which traverses a mostly mountainous route from Kalka to Shimla. It is known for dramatic views of the hills and surrounding villages.Kapaleeshwarar Temple is a Hindu temple dedicated to lord Shiva located in Mylapore, Chennai in the Indian state of Tamil Nadu. The form of Shiva's consortKapaleeshwarar Temple is a Hindu temple dedicated to lord Shiva located in Mylapore, Chennai in the Indian state of Tamil Nadu. The form of Shiva's consort "
+    },
+    {
+      "id": 6,
+      "title": "Golden Temple",
+      "location":"Amritsar",
+      "photo":"https://www.planetware.com/wpimages/2020/01/india-in-pictures-beautiful-places-to-photograph-golden-temple-amritsar.jpg",
+      "description":"The Golden Temple is a gurdwara located in the city of Amritsar, Punjab, India. It is the preeminent spiritual site of Sikhism. It is one of the holiestKapaleeshwarar Temple is a Hindu temple dedicated to lord Shiva located in Mylapore, Chennai in the Indian state of Tamil Nadu. The form of Shiva's consortKapaleeshwarar Temple is a Hindu temple dedicated to lord Shiva located in Mylapore, Chennai in the Indian state of Tamil Nadu. The form of Shiva's consort ..."
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+.navCard {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    text-align: center;
+    justify-content: center;
+    /* border: 2px solid black; */
+    background-color: #264837;
+    /* position: fixed; */
+    width: 100%;
+    margin-bottom: 70px;
+}
+
+.navCard p {
+    padding-top: 13px;
+
+}
+
+.btn {
+    height: 35px;
+    background-color: rgba(23, 23, 59, 0.925);
+    border-radius: 10px;
+    color: white;
+    ;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.navCard h1,
+p {
+    text-decoration: none;
+    font-style: italic;
+    color: white;
+}
+
+.cardwrapper {
+    width: 80%;
+    margin: auto;
+    /* border: 2px solid black; */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 80px;
+    row-gap: 50px;
+
+
+}
+
+.Card {
+    width: 100%;
+    /* height: 300px; */
+    justify-content: center;
+    padding: 20px;
+    margin: auto;
+    /* padding-bottom: 50px; */
+    /* border: 5px solid gray; */
+    text-align: center;
+    background: url('https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&w=600');
+    background-size: contain;
+}
+
+
+
+.Card h2 {
+    font-size: 25px;
+    font-style: italic;
+    text-align: left;
+    color: white;
+}
+
+.Card img {
+    border-radius: 50%;
+    width: 100%;
+}
+
+
+.wrapper {
+    /* border: 1px solid black; */
+    width: 100%;
+
+}
+
+.wrapper:hover {
+    cursor: pointer;
+}
+
+.footerwrapper {
+    width: 100%;
+    margin: auto;
+    /* border: 1px solid black; */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: url('https://assetshare.basspro.com/content/dam/bps-general-assets/web/site-elements/home-page/club/images/club-background.jpg');
+    padding: 50px 0px 100px 0px;
+}
+
+.footerwrapper div {
+    /* border: 1px solid gray; */
+    text-align: center;
+}
+
+.footerwrapper div p {
+    color: white;
+    ;
+}
+
+.details {
+    /* border: 2px solid red; */
+    text-align: center;
+
+}
+
+.details h2 {
+    font-size: 22px;
+
+}
+
+.details p {
+    font-size: 16px;
+    color: black;
+}
+
+@media only screen and (max-width: 780px) {
+    .footerwrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cardwrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .footerwrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cardwrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
