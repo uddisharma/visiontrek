@@ -1,7 +1,11 @@
 const express = require('express');
 const app = express();
-app.set('views engine', 'ejs');
+app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
-    res.render('index')
+    res.render('index', {
+        name: 'Udit Sharma'
+    })
 })
-app.listen(4500)
+app.listen(2000, () => {
+    console.log('im listening');
+})
