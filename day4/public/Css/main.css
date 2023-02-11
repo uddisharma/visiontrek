@@ -1,4 +1,21 @@
-h1 {
-    background-color: black;
-    color: white;
+@import url('https://fonts.googleapis.com/css2?family=Piazzolla:ital,opsz,wght@0,8..30,200;0,8..30,300;0,8..30,400;1,8..30,900&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Piazzolla,serif;
+}
+:root{
+    --main-bg: #1e272e;
+    --main-color: #0097e6;
+}
+html{
+    /* font-size: 62.5%; */
+}
+.row{
+    margin: 0;
+}
+#nav a{
+    /* background-color: var(--main-bg); */
+    color: var(--main-bg);
 }
