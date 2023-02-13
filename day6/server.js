@@ -19,12 +19,19 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 main().catch(err => console.log(err));
 
+
+// CONNECTING TO MONGODB
+
 async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/test',(err)=>{
     if (err) console.log(err);
     else console.log('connected');
   });
 }
+
+//CREATING THE DATA
+
+
 const DataType= new mongoose.Schema({
   name: 'string',
   class: 'number',
@@ -54,8 +61,18 @@ const document= async ()=>{
   }
 }
 // document();
+
+
+
+//READING THE DATA
+
 const getData = async()=>{
-  const res= await ColModal.find({name: 'Deepak Sharma'}).select({course:1});
-  console.log(res)
+  try{
+    const res= await ColModal.find({class :{$gte:11}}).select({course:1});
+    console.log(res)
+  }catch(error){
+    console.log(error)
+  }
+ 
 }
 getData();
