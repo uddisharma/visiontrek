@@ -81,7 +81,7 @@ const getData = async()=>{
 //UPDATING THE DATA
 
 const updateData = async(id)=>{
-  const res= await ColModal.findByIdAndUpdate({_id:id},{$set: {course:'Chemistry'}});
+  const res= await ColModal.findByIdAndUpdate({_id:id},{$set: {course:'Chemistry Physics'}},{new:true, useFindAndModify:false});
   console.log(res);
 }
 
