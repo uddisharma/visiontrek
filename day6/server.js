@@ -53,4 +53,9 @@ const document= async ()=>{
     console.log(error)
   }
 }
-document();
+// document();
+const getData = async()=>{
+  const res= await ColModal.find({name: 'Deepak Sharma'}).select({course:1});
+  console.log(res)
+}
+getData();
