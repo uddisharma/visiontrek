@@ -81,8 +81,28 @@ const getData = async()=>{
 //UPDATING THE DATA
 
 const updateData = async(id)=>{
-  const res= await ColModal.findByIdAndUpdate({_id:id},{$set: {course:'Chemistry Physics'}},{new:true, useFindAndModify:false});
-  console.log(res);
+  try {
+    const res= await ColModal.findByIdAndUpdate({_id:id},{$set: {course:'Chemistry Physics'}},{new:true, useFindAndModify:false});
+    console.log(res);
+  } catch (error) {
+console.log(error)
+  }
+ 
 }
 
-updateData("63ea0691610d38e959efb1f7");
+// updateData("63ea0691610d38e959efb1f7");
+
+
+//DELETEING THE DATA
+
+
+const deleteData = async(id)=>{
+try {
+  const res= await ColModal.findByIdAndDelete({_id:id});
+  console.log(res)
+} catch (error) {
+  console.log(error)
+}
+}
+
+// deleteData('63ea0691610d38e959efb1f6')
