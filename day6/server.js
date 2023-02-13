@@ -75,4 +75,14 @@ const getData = async()=>{
   }
  
 }
-getData();
+// getData();
+
+
+//UPDATING THE DATA
+
+const updateData = async(id)=>{
+  const res= await ColModal.findByIdAndUpdate({_id:id},{$set: {course:'Chemistry'}});
+  console.log(res);
+}
+
+updateData("63ea0691610d38e959efb1f7");
