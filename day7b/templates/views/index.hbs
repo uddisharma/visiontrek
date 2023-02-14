@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{>navbar}}
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="width: 70%; margin:auto">
+        <h1>contact us</h1>
+        <form action="/students" method="POST">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" id="exampleFormControlInput1"
+                    placeholder="Enter your name here..">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Age</label>
+                <input type="number" name="age" class="form-control" id="exampleFormControlInput1"
+                    placeholder="more than 18">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email</label>
+                <input type="text" name="email" class="form-control" id="exampleFormControlInput1"
+                    placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Enter Text here</label>
+                <input type="number" name="number" class="form-control" id="exampleFormControlInput1"
+                    placeholder="Enter your Number here...">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Send Details</button>
+            {{!-- <input type="button" class="btn btn-primary" value="Send Details"> --}}
+        </form>
+    </div>
+</body>
+
+</html>
