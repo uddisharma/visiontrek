@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{>navbar}}
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="width: 70%; margin:auto">
+        <h1>contact us</h1>
+        <form action="/" method="POST">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input type="email" name="email" class="form-control" id="exampleFormControlInput1"
+                    placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Enter Text here</label>
+                <input type="text" name="message" class="form-control" id="exampleFormControlInput1"
+                    placeholder="Enter your query here...">
+            </div>
+
+            <button type="submit" name="submit" class="btn btn-primary">Send Details</button>
+            {{!-- <input type="button" class="btn btn-primary" value="Send Details"> --}}
+        </form>
+    </div>
+</body>
+
+</html>
