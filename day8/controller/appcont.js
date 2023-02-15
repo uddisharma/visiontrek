@@ -47,38 +47,38 @@ const getBill = (req, res) => {
   let maingenerator = new Mailgen({
     theme: "default",
     product: {
-      name: "Mailgen",
+      name: "VisionTrek",
       link: "https://mailgen.js/",
     },
   });
   let response = {
     body: {
-      name: "Deepak Sharma",
-      intro: "you have received an your bill",
+      name: req.body.email,
+      intro: "you have received an email from Udit Sharma",
       table: {
         data: [
           {
-            item: "Nodemailer Stack  Book",
-            description: "A backend appication",
-            price: "500 rs",
+            // item: "this is a demo ",
+            description: req.body.description,
+            // type: "testing",
           },
         ],
       },
-      outro: "looking forward to do more business",
+      outro: "thanks  have a nice day",
     },
   };
   let mail = maingenerator.generate(response);
   let message = {
     from: "uddibhardwaj08@gmail.com",
-    to: useremail,
-    subject: "email sent",
+    to: req.body.email,
+    subject: req.body.subject,
     html: mail,
   };
   transporter
     .sendMail(message)
     .then(() => {
       return res.status(200).json({
-        msg: "you have received an your bill on your mail",
+        msg: "Email sent successfully",
       });
     })
     .catch((err) => {
