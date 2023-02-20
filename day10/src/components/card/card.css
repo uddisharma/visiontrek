@@ -1,0 +1,131 @@
+
+.card-main{
+    margin: 60px 20px 20px 20px;
+    display: flex;
+    
+}
+
+.profile-img2{
+  width: 130px;
+  height: 130px;
+  margin-right: 20px;
+  margin-top: -60px;
+  border-radius: 55%;
+  margin-left: 10px;
+
+}
+
+/* .card-buttons{
+    margin-left: 500px
+} */
+
+
+.card-list img{
+  width: 200px;
+  height: 200px;
+  margin: 5px 20px;
+}
+
+
+.card-list{
+  width: 295px;
+  border: 1px solid gray;
+  margin-bottom: 25px;
+  border-radius: 5px;
+}
+
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1rem
+}
+
+.card-title {
+  margin-bottom: 2px;
+}
+
+.card-button{
+  margin-top: 4px;
+}
+
+
+  @media (min-width: 768px) {
+    .tooltiptext {
+    
+        visibility: hidden;
+        width: auto;
+        color: rgb(43, 55, 226);
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 10px;
+        position: absolute;
+        z-index: 1;
+        margin-left: 500px;
+      }
+
+      .wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        grid-auto-rows: minmax(100px, auto);
+      }
+      
+  }
+
+
+
+  .change-address{
+    cursor: pointer;
+  }
+
+  .nav-pills{margin: 10px;
+           border-bottom: 2px solid #335eea;}
+
+
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+   
+    color: #335eea !important;
+    border-bottom: 0px solid #335eea;
+    background-color: unset !important;
+    font-weight: 800;
+}
+
+.nav-link{color: #000 !important;
+          font-weight: 500;}
+
+.rounded img{width: 100%;}
+
+.ms-md-10 img {width: 100%;}
+
+.card-list img {
+  width: 200px;
+  height: 200px;
+  margin: 11px 46px;
+  
+  /* text-align: center; */
+}
+
+.card-list {box-shadow: 1px 1px 9px 2px rgb(103 105 108 / 22%);}
+
+.card-list {
+  width: 295px;
+  border: 0px solid gray;
+  margin-bottom: 25px;
+  border-radius: 9px;
+}
+
+
+.bordertext {
+  width: fit-content;
+  margin-top: -13px;
+  margin-left: 15px;
+  background: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.mt-2 {
+  margin-top: unset !important;
+}
+
+

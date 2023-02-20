@@ -1,0 +1,46 @@
+
+
+  @media (min-width: 768px) {
+    .forget-forms{
+        width: 500px;
+        margin-left: 180px;
+        padding: 40px 40px 200px 40px;
+        border-radius: 6px;
+        /* border: 1px solid gray; */
+        box-shadow: 10px #606866;
+        margin-top: 50px;
+    }
+    .find-text{
+        font-size: 24px;
+        font-weight: 550;
+    }
+
+    .info-text{
+        font-weight: 400;
+        font-size: larger;
+        }
+
+    .forget-box{
+        margin-left: 80px;
+    }
+    .auth-btn{
+        margin-top: 170px;
+      }
+  }
+
+ 
+
+  .auth-button {
+    display: block;
+    padding: 10px 20px;
+    border-radius: 5px;
+
+  }
+ 
+  .auth-button span{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 18px;
+  }

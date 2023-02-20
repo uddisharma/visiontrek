@@ -1,0 +1,153 @@
+
+
+.main{
+    width: 90%;
+    display: flex;
+    margin: 75px 30px 30px 150px;
+}
+
+.slider{
+    width: 50%;
+    height: 500px;
+    background-color: gray;
+    border-radius: 7px;
+}
+
+
+.log-form{
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    
+}
+
+.log-form form{
+    margin-left: 150px;
+}
+
+.log-form input{
+    border-bottom: 1px solid rgb(141, 135, 135);
+    width: 350px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.input:focus{
+    border: none;
+}
+
+.signup:hover{
+    color: blue;
+}
+
+
+.input:hover, 
+.input:active, 
+.input:focus
+{
+    outline:0px !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid rgb(160, 156, 156);
+    width: 350px;
+    font-size: 18px;
+    padding-left: 5px;
+}
+
+
+.forget{
+    text-decoration: underline;
+    margin-top: 15px;
+    float: right;
+    color: rgb(97, 96, 96);
+    margin-right: 70px;
+}
+
+.sign_btn{
+    background-color: gray;
+    margin-top: 60px;
+    margin-left: 130px;
+    padding: 8px 50px 8px 50px;
+    border-radius: 10px;
+    color: white;
+}
+
+.line{
+    border-top: 1px solid rgb(88, 83, 83);
+    width: 100px;
+    height: 1px;
+    margin-top: 14px;
+}
+
+.or{
+    display: flex;
+    margin: 30px;
+    margin-left: 100px;
+}
+
+.google-img{
+    width: 30px;
+    height: 30px;
+}
+
+.google{
+    margin-left: 270px;
+}
+.google span{
+   color:rgb(88, 83, 83);
+   text-decoration: underline;
+
+} 
+
+
+/* mobile view */
+@media (max-width: 768px) {
+    .slider{
+        display: none;
+    }
+
+    .log-form{
+      
+        margin-left:40px;
+    }
+    .google{
+        margin-left: 200px;
+    }
+
+    .log-form input{
+        border-bottom: 1px solid rgb(141, 135, 135);
+        width: 280px;
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+   
+    
+    .or{
+        margin-left: 29px;
+    }
+
+    .sign_btn{
+        margin-left: 80px;
+       
+    }
+
+    .forget{
+        margin-right: 5px;
+    }
+    .email{
+        margin-top: -30px;
+       width: 50px;
+    }
+    .input:hover, 
+.input:active, 
+.input:focus
+{
+    outline:0px !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid rgb(160, 156, 156);
+    width: 280px;
+    font-size: 18px;
+    padding-left: 5px;
+}
+
+}
