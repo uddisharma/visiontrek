@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "country-state-city": "^3.1.2",
     "express": "^4.18.2",
     "hbs": "^4.2.0",
     "mailgen": "^2.0.27",

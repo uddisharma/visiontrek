@@ -9,7 +9,7 @@ const registerScheme = new mongoose.Schema({
   phoneNumber: {
     type: Number,
     Unique: true,
-    required: true,
+    // required: true,
   },
   password: {
     type: String,
