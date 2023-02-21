@@ -24,17 +24,37 @@ const registerScheme = new mongoose.Schema({
     // required : true,
   },
 });
-// const loginScheme = new mongoose.Schema({
-//   email: {
-//     type: String,
-//     Unique: true,
-//     required: true,
-//   },
-//   password: {
-//     type: String,
-//     required: true,
-//   },
-// });
+const makeCard = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  lastname: {
+    type: String,
+  },
+  profession: {
+    type: String,
+    required: true,
+  },
+  experience: {
+    type: Number,
+    required: true,
+  },
+
+  linkedIn: {
+    type: String,
+  },
+  instagram: {
+    type: String,
+  },
+  facebook: {
+    type: String,
+  },
+});
 const cardModal = new mongoose.model("register", registerScheme);
-// const loginModal = new mongoose.model("register", loginScheme);
-module.exports = { cardModal };
+const makeCardModal = new mongoose.model("card", makeCard);
+module.exports = { cardModal, makeCardModal };

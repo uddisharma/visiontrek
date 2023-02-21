@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "./templates/views"));
 hbs.registerPartials(path.join(__dirname, "./templates/partials"));
-const { cardModal } = require("./modal");
+const { cardModal, makeCardModal } = require("./modal");
 var OTP = Math.floor(1000 + Math.random() * 9000);
 app.get("/", (req, res) => {
   res.render("index");
@@ -30,12 +30,12 @@ app.post("/create-password", async (req, res) => {
         otp: OTP,
       });
       const saveregData = await regData.save();
-      res.send("Password created successfully");
+      res.status(200).send("Password created successfully");
     } else {
       res.send("password does not match");
     }
   } catch (error) {
-    res.send(error.message);
+    res.status(404).send(error.message);
   }
 });
 app.get("/forgot-password", async (req, res) => {
@@ -43,7 +43,7 @@ app.get("/forgot-password", async (req, res) => {
 });
 app.post("/forgot-password", async (req, res) => {
   const forgotpas = await cardModal.findOne({ email: req.body.email });
-  if (forgotpas) {
+  try {
     let config = {
       service: "gmail",
       auth: {
@@ -93,8 +93,8 @@ app.post("/forgot-password", async (req, res) => {
           error: err.message,
         });
       });
-  } else {
-    res.send("email address does not exist");
+  } catch (error) {
+    res.status(404).send(error.message);
   }
 });
 app.get("/register", (req, res) => {
@@ -105,16 +105,53 @@ app.get("/resend", (req, res) => {
 });
 app.get("/personal-details/:username", async (req, res) => {
   const username = req.params.username;
-  const personalDetails = await cardModal.findOne({ email: username });
-  res.send(personalDetails);
+  try {
+    const personalDetails = await makeCardModal.findOne({ email: username });
+    res.send(personalDetails);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
 });
 app.get("/social-links/:username", async (req, res) => {
   const socialLink = req.params.username;
-  const personalDetails = await cardModal.findOne({ email: socialLink });
-  if (personalDetails.links) {
-    res.send(personalDetails.links);
-  } else {
-    res.send("there is no social link");
+  try {
+    const personalDetails = await makeCardModal.findOne({ email: socialLink });
+    if (
+      personalDetails.linkedIn ||
+      personalDetails.instagram ||
+      personalDetails.facebook
+    ) {
+      res.send(
+        "LinkedIn   " +
+          personalDetails.linkedIn +
+          "Instagram   " +
+          personalDetails.instagram +
+          "Facebook    " +
+          personalDetails.facebook
+      );
+    } else {
+      res.send("there is no social link");
+    }
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
+app.get("/card/:id", async (req, res) => {
+  const _id = req.params.id;
+  try {
+    const card = await makeCardModal.findById({ _id });
+    res.status(200).send(card);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
+app.delete("/deletecard/:id", async (req, res) => {
+  const _id = req.params.id;
+  try {
+    const deleteCard = await makeCardModal.findByIdAndDelete(_id);
+    res.status(200).send("Card has been deleted");
+  } catch (error) {
+    res.status(404).send(error.message);
   }
 });
 const sendotp = (req, res) => {
@@ -207,6 +244,28 @@ app.post("/login", async (req, res) => {
     console.log(error.message);
   }
 });
+app.get("/create-work-details", async (req, res) => {
+  // res.send("create-work-details");
+  res.render("workdetails");
+});
+app.post("/create-work-details", async (req, res) => {
+  try {
+    const userData = new makeCardModal({
+      email: req.body.email,
+      name: req.body.name,
+      lastname: req.body.last,
+      profession: req.body.pro,
+      experience: req.body.exp,
+      linkedIn: req.body.linkedin,
+      instagram: req.body.instagram,
+      facebook: req.body.facebook,
+    });
+    const user = await userData.save();
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
 app.get("/get-user-profile", (req, res) => {
   res.render("getprofile");
 });
@@ -244,14 +303,22 @@ app.get("/get-user-profile/:id", async (req, res) => {
 });
 app.get("/:link", (req, res) => {
   const link = req.params.link;
-  res.send(`http://localhost:9090/${link}`);
+  try {
+    res.status(200).send(`http://localhost:9090/${link}`);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
 });
 app.post("/resend", async (req, res) => {
-  sendotp(req, res);
-  const updateotp = await cardModal.updateOne(
-    { email: req.body.email },
-    { $set: { otp: OTP } }
-  );
+  try {
+    sendotp(req, res);
+    const updateotp = await cardModal.updateOne(
+      { email: req.body.email },
+      { $set: { otp: OTP } }
+    );
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
 });
 app.listen(port, () => {
   console.log("Listening on port");
