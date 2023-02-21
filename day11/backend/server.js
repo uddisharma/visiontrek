@@ -5,7 +5,6 @@ const app = express();
 const path = require("path");
 const hbs = require("hbs");
 require("./connect.js");
-const countries = require("./countries");
 const port = process.env.PORT || 9090;
 app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "hbs");
