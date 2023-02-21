@@ -13,6 +13,56 @@ app.set("views", path.join(__dirname, "./templates/views"));
 hbs.registerPartials(path.join(__dirname, "./templates/partials"));
 const { cardModal, makeCardModal } = require("./modal");
 var OTP = Math.floor(1000 + Math.random() * 9000);
+const sendotp = (req, res) => {
+  let config = {
+    service: "gmail",
+    auth: {
+      user: "uddibhardwaj08@gmail.com",
+      pass: "jjakxuuduudiywaz",
+    },
+  };
+  let transporter = nodemailer.createTransport(config);
+  let maingenerator = new Mailgen({
+    theme: "default",
+    product: {
+      name: "VisionTrek",
+      link: "https://mailgen.js/",
+    },
+  });
+  let response = {
+    body: {
+      name: req.body.email,
+      intro: "you have received an email from VisionTrek ",
+      table: {
+        data: [
+          {
+            description: OTP,
+          },
+        ],
+      },
+      outro: "Valid for 5 mints",
+    },
+  };
+  let mail = maingenerator.generate(response);
+  let message = {
+    from: "uddibhardwaj08@gmail.com",
+    to: req.body.email,
+    subject: "Verification Code",
+    html: mail,
+  };
+  transporter
+    .sendMail(message)
+    .then(() => {
+      return res.status(200).json({
+        msg: "OTP sent successfully",
+      });
+    })
+    .catch((err) => {
+      return res.status(500).json({
+        error: err.message,
+      });
+    });
+};
 app.get("/", (req, res) => {
   res.render("index");
 });
@@ -103,6 +153,18 @@ app.get("/register", (req, res) => {
 app.get("/resend", (req, res) => {
   res.render("resend");
 });
+app.post("/verify/:username", async (req, res) => {
+  const username = req.params.username;
+  const otp = req.body.otp;
+  try {
+    const verify = await cardModal.findOne({ email: username });
+    if (otp == verify.otp) {
+      res.status(200).send("verfied successfully");
+    }
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
 app.get("/personal-details/:username", async (req, res) => {
   const username = req.params.username;
   try {
@@ -154,56 +216,6 @@ app.delete("/deletecard/:id", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
-const sendotp = (req, res) => {
-  let config = {
-    service: "gmail",
-    auth: {
-      user: "uddibhardwaj08@gmail.com",
-      pass: "jjakxuuduudiywaz",
-    },
-  };
-  let transporter = nodemailer.createTransport(config);
-  let maingenerator = new Mailgen({
-    theme: "default",
-    product: {
-      name: "VisionTrek",
-      link: "https://mailgen.js/",
-    },
-  });
-  let response = {
-    body: {
-      name: req.body.email,
-      intro: "you have received an email from VisionTrek ",
-      table: {
-        data: [
-          {
-            description: OTP,
-          },
-        ],
-      },
-      outro: "Valid for 5 mints",
-    },
-  };
-  let mail = maingenerator.generate(response);
-  let message = {
-    from: "uddibhardwaj08@gmail.com",
-    to: req.body.email,
-    subject: "Verification Code",
-    html: mail,
-  };
-  transporter
-    .sendMail(message)
-    .then(() => {
-      return res.status(200).json({
-        msg: "OTP sent successfully",
-      });
-    })
-    .catch((err) => {
-      return res.status(500).json({
-        error: err.message,
-      });
-    });
-};
 app.post("/register", async (req, res) => {
   sendotp(req, res);
   try {
