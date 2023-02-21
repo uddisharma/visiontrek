@@ -55,6 +55,25 @@ const makeCard = new mongoose.Schema({
     type: String,
   },
 });
+const adminScheme = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    Unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  cpassword: {
+    type: String,
+    required: true,
+  },
+  otp: {
+    type: String,
+  },
+});
 const cardModal = new mongoose.model("register", registerScheme);
 const makeCardModal = new mongoose.model("card", makeCard);
-module.exports = { cardModal, makeCardModal };
+const adminModal = new mongoose.model("admin", adminScheme);
+module.exports = { cardModal, makeCardModal, adminModal };

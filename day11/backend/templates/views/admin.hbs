@@ -28,7 +28,7 @@
                 <a class="nav-link" href="/create-work-details">Create Card</a>
             </li>
         </ul>
-        <form action="/login" method="POST">
+        <form action="/admin" method="POST">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
                 <input type="email" name="email" class="form-control" id="exampleInputEmail1"
@@ -37,20 +37,11 @@
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="number" name="password" class="form-control" id="exampleInputPassword1">
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
             </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">OTP</label>
-                <input type="number" name="otp" class="form-control" id="exampleInputPassword1">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Login</button>
 
         </form>
-        {{!-- <form action="/resend" method="POST"> --}}
-            <a href="/resend">
-                <button type="button" class="btn btn-primary">Resend OTP</button></a>
-            {{!--
-        </form> --}}
     </div>
 
 </body>

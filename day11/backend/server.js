@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "./templates/views"));
 hbs.registerPartials(path.join(__dirname, "./templates/partials"));
-const { cardModal, makeCardModal } = require("./modal");
+const { cardModal, makeCardModal, adminModal } = require("./modal");
 var OTP = Math.floor(1000 + Math.random() * 9000);
 const sendotp = (req, res) => {
   let config = {
@@ -82,6 +82,118 @@ app.post("/create-password", async (req, res) => {
       res.status(200).send("Password created successfully");
     } else {
       res.send("password does not match");
+    }
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
+// app.get("/admin-register", (req, res) => {
+//   res.render("adminregister");
+// });
+// app.get("/admin-verify", (req, res) => {
+//   res.render("verifyadmin");
+// // });
+// app.post("/admin-verify/", async (req, res) => {
+//   const email = req.body.email;
+//   const otp = req.body.otp;
+
+//   try {
+//     const verifyData = await adminModal.findOne({ email: email });
+//     if (verifyData.otp == req.body.otp) {
+//       res.status(200).send("Verified successfully");
+//     } else {
+//       res.status(403).send("Verification failed");
+//     }
+//   } catch (error) {
+//     res.status(404).send(error.message);
+//   }
+// // });
+// app.post("/admin-register", async (req, res) => {
+//   let config = {
+//     service: "gmail",
+//     auth: {
+//       user: "uddibhardwaj08@gmail.com",
+//       pass: "jjakxuuduudiywaz",
+//     },
+//   };
+//   let transporter = nodemailer.createTransport(config);
+//   let maingenerator = new Mailgen({
+//     theme: "default",
+//     product: {
+//       name: "VisionTrek",
+//       link: "https://mailgen.js/",
+//     },
+//   });
+//   let response = {
+//     body: {
+//       name: req.body.email,
+//       intro: "you have received an email for admin registration ",
+//       table: {
+//         data: [
+//           {
+//             description: OTP,
+//           },
+//         ],
+//       },
+//       outro: "Valid for 5 mints",
+//     },
+//   };
+//   let mail = maingenerator.generate(response);
+//   let message = {
+//     from: "uddibhardwaj08@gmail.com",
+//     to: "uddibhardwaj08@gmail.com",
+//     subject: "Verification Code",
+//     html: mail,
+//   };
+//   transporter
+//     .sendMail(message)
+//     .then(() => {
+//       return res.status(200).json({
+//         msg: "OTP sent successfully",
+//       });
+//     })
+//     .catch((err) => {
+//       return res.status(500).json({
+//         error: err.message,
+//       });
+//     });
+//   const regData = new adminModal({
+//     email: req.body.email,
+//     password: req.body.password,
+//     cpassword: req.body.cpassword,
+//     otp: OTP,
+//   });
+//   const saving = regData.save();
+// });
+app.get("/admin", (req, res) => {
+  res.render("admin");
+});
+app.post("/admin", async (req, res) => {
+  const useremail = req.body.email;
+  const password = req.body.password;
+  // const alldata = cardModal.register.find();
+  // var collections = cardModal.regsiter();
+
+  try {
+    const regData = await adminModal.findOne({ email: useremail });
+    if (
+      req.body.email === regData.email &&
+      regData.password == req.body.password
+    ) {
+      {
+        cardModal
+          .find()
+          .then((card) => {
+            res.send(card);
+          })
+          .catch((error) => {
+            res.status(500).send(error.message);
+          });
+      }
+      // res.status(200).send("you are logged in successfully");
+      // res.send(collections);
+    } else {
+      res.status(403).send("You are not logged in");
     }
   } catch (error) {
     res.status(404).send(error.message);
@@ -175,6 +287,7 @@ app.get("/personal-details/:username", async (req, res) => {
 });
 app.get("/social-links/:username", async (req, res) => {
   const socialLink = req.params.username;
+  console.log(socialLink);
   try {
     const personalDetails = await makeCardModal.findOne({ email: socialLink });
     if (
@@ -242,10 +355,10 @@ app.post("/login", async (req, res) => {
     const useremail = req.body.email;
     const userpassword = req.body.password;
     const userotp = req.body.otp;
-    console.log(userotp);
+    // console.log(userotp);
     const userData = await cardModal.findOne({ email: useremail });
     console.log(userData);
-    if (userData.password === userpassword && userData.otp === userotp) {
+    if (userData.password === userpassword && otp === userotp) {
       res.send("successfully login");
     } else {
       res.send("invalid email or password");
