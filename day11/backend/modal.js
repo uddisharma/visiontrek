@@ -57,6 +57,9 @@ const makeCard = new mongoose.Schema({
   facebook: {
     type: String,
   },
+  shared: {
+    type: String,
+  },
 });
 const adminScheme = new mongoose.Schema({
   email: {

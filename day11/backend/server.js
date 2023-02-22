@@ -2,12 +2,17 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
 const app = express();
+require("dotenv").config();
 const path = require("path");
 const hbs = require("hbs");
 require("./connect.js");
+const session = require("express-session");
+const passport = require("passport");
+require("./passport");
 const port = process.env.PORT || 9090;
 app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "hbs");
+
 app.set("views", path.join(__dirname, "./templates/views"));
 hbs.registerPartials(path.join(__dirname, "./templates/partials"));
 const {
@@ -17,6 +22,7 @@ const {
   locationModal,
 } = require("./modal");
 const { Country, State, City } = require("country-state-city");
+const { trusted } = require("mongoose");
 // const ct = Country.getAllCountries();
 var OTP = Math.floor(1000 + Math.random() * 9000);
 const sendotp = (req, res) => {
@@ -69,17 +75,50 @@ const sendotp = (req, res) => {
       });
     });
 };
-// app.post("/ct", (req, res) => {
-//   // res.send("country");
-//   const cts = new locationModal({
-//     Country: Country.getAllCountries(),
-//     State: State.getAllStates(),
-//     City: City.getAllCities(),
-//   });
-//   const savelocation = cts.save();
+// app.get("/google", (req, res) => {
+//   res.render("googlelogin");
 // });
+// app.get("/google-login", passport.authenticate("google"), {
+//   scope: ["profile", "email"],
+// });
+
+function isLoggedIn(req, res, next) {
+  req.user ? next() : res.sendStatus(401);
+}
+
+app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.get("/", (req, res) => {
-  res.render("index");
+  res.send('<a href="/auth/google">Authenticate with Google</a>');
+});
+
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["email", "profile"] })
+);
+
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/protected",
+    failureRedirect: "/auth/google/failure",
+  })
+);
+
+app.get("/protected", isLoggedIn, (req, res) => {
+  res.send(`Hello ${req.user.displayName}`);
+});
+
+app.get("/logout", (req, res) => {
+  req.logout();
+  req.session.destroy();
+  res.send("Goodbye!");
+});
+
+app.get("/auth/google/failure", (req, res) => {
+  res.send("Failed to authenticate..");
 });
 app.get("/location/:username", async (req, res) => {
   const username = req.params.username;
@@ -373,6 +412,32 @@ app.get("/social-links/:username", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
+
+app.get("/cards", (req, res) => {
+  const cards = makeCardModal
+    .find()
+    .then((cards) => res.send(cards))
+    .catch((err) => res.status(500).send(err));
+});
+app.patch("/shareCard/:id", async (req, res) => {
+  const card = req.params.id;
+  // console.log("card");
+  const share = await makeCardModal.findByIdAndUpdate(
+    { _id: card },
+    { $set: { shared: "true" } }
+  );
+  res.send("shared");
+});
+app.get("/shared-card/:username", async (req, res) => {
+  const sharedCard = await makeCardModal.findOne({
+    email: req.params.username,
+  });
+  res.send(
+    sharedCard.shared == "true"
+      ? sharedCard
+      : "you have not shared any card yet"
+  );
+});
 app.get("/card/:id", async (req, res) => {
   const _id = req.params.id;
   try {
@@ -431,6 +496,9 @@ app.post("/login", async (req, res) => {
     console.log(error.message);
   }
 });
+app.get("/google-login", (req, res) => {
+  res.render("googlelogin");
+});
 app.get("/create-work-details", async (req, res) => {
   // res.send("create-work-details");
   res.render("workdetails");
@@ -447,6 +515,7 @@ app.post("/create-work-details", async (req, res) => {
       linkedIn: req.body.linkedin,
       instagram: req.body.instagram,
       facebook: req.body.facebook,
+      shared: "false",
     });
     const user = await userData.save();
     res.status(200).send(user);
