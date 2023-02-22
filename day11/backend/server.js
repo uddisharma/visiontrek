@@ -10,7 +10,14 @@ app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "./templates/views"));
 hbs.registerPartials(path.join(__dirname, "./templates/partials"));
-const { cardModal, makeCardModal, adminModal } = require("./modal");
+const {
+  cardModal,
+  makeCardModal,
+  adminModal,
+  locationModal,
+} = require("./modal");
+const { Country, State, City } = require("country-state-city");
+// const ct = Country.getAllCountries();
 var OTP = Math.floor(1000 + Math.random() * 9000);
 const sendotp = (req, res) => {
   let config = {
@@ -62,8 +69,30 @@ const sendotp = (req, res) => {
       });
     });
 };
+// app.post("/ct", (req, res) => {
+//   // res.send("country");
+//   const cts = new locationModal({
+//     Country: Country.getAllCountries(),
+//     State: State.getAllStates(),
+//     City: City.getAllCities(),
+//   });
+//   const savelocation = cts.save();
+// });
 app.get("/", (req, res) => {
   res.render("index");
+});
+app.get("/location/:username", async (req, res) => {
+  const username = req.params.username;
+  try {
+    const userData = await makeCardModal.findOne({ email: username });
+    if (userData.location) {
+      res.send(userData.location);
+    } else {
+      res.status(404).send("location not found");
+    }
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
 });
 app.get("/create-password", (req, res) => {
   res.render("createpass");
@@ -87,6 +116,36 @@ app.post("/create-password", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
+
+app.get("/reset-password", (req, res) => {
+  res.render("resetpass");
+});
+app.post("/reset-password", async (req, res) => {
+  const email = req.body.email;
+  const currpass = req.body.currpassword;
+  const newpass = req.body.newpass;
+  const cnewpass = req.body.cnewpass;
+  try {
+    const getdata = await cardModal.findOne({ email: email });
+    if (getdata.password == currpass) {
+      const setnew = await cardModal.findByIdAndUpdate(
+        { _id: getdata._id },
+        {
+          $set: {
+            password: newpass,
+            cpassword: cnewpass,
+          },
+        }
+      );
+      res.status(200).send("New password has been updated");
+    } else {
+      res.status(404).send("Current password does not match");
+    }
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
+
 // app.get("/admin-register", (req, res) => {
 //   res.render("adminregister");
 // });
@@ -170,9 +229,15 @@ app.get("/admin", (req, res) => {
 });
 app.post("/admin", async (req, res) => {
   const useremail = req.body.email;
-  const password = req.body.password;
-  // const alldata = cardModal.register.find();
-  // var collections = cardModal.regsiter();
+
+  // const users = cardModal
+  //   .find()
+  //   .then((card) => {
+  //     res.send(card);
+  //   })
+  //   .catch((error) => {
+  //     res.status(500).send(error.message);
+  //   });
 
   try {
     const regData = await adminModal.findOne({ email: useremail });
@@ -180,18 +245,16 @@ app.post("/admin", async (req, res) => {
       req.body.email === regData.email &&
       regData.password == req.body.password
     ) {
-      {
-        cardModal
-          .find()
-          .then((card) => {
-            res.send(card);
-          })
-          .catch((error) => {
-            res.status(500).send(error.message);
-          });
-      }
+      // res.send(users);
+      cardModal
+        .find()
+        .then((card) => {
+          res.send("This is the list of users on our website   " + card);
+        })
+        .catch((error) => {
+          res.status(500).send(error.message);
+        });
       // res.status(200).send("you are logged in successfully");
-      // res.send(collections);
     } else {
       res.status(403).send("You are not logged in");
     }
@@ -378,6 +441,7 @@ app.post("/create-work-details", async (req, res) => {
       email: req.body.email,
       name: req.body.name,
       lastname: req.body.last,
+      location: req.body.location,
       profession: req.body.pro,
       experience: req.body.exp,
       linkedIn: req.body.linkedin,

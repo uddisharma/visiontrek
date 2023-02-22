@@ -36,6 +36,9 @@ const makeCard = new mongoose.Schema({
   lastname: {
     type: String,
   },
+  location: {
+    type: String,
+  },
   profession: {
     type: String,
     required: true,
@@ -73,7 +76,19 @@ const adminScheme = new mongoose.Schema({
     type: String,
   },
 });
+const locationSchema = new mongoose.Schema({
+  Country: {
+    type: String,
+  },
+  State: {
+    type: String,
+  },
+  City: {
+    type: String,
+  },
+});
 const cardModal = new mongoose.model("register", registerScheme);
 const makeCardModal = new mongoose.model("card", makeCard);
 const adminModal = new mongoose.model("admin", adminScheme);
-module.exports = { cardModal, makeCardModal, adminModal };
+const locationModal = new mongoose.model("location", locationSchema);
+module.exports = { cardModal, makeCardModal, adminModal, locationModal };
