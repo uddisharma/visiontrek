@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>header}}
+</head>
+
+<body>
+    <div style="width: 75%; margin:auto">
+        <ul class="nav justify-content-center">
+            {{!-- <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Active</a>
+            </li> --}}
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/get-user-profile">Get Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/create-work-details">Create Card</a>
+            </li>
+        </ul>
+        <div class="card" style="width: 18rem;">
+            <img src="https://t4.ftcdn.net/jpg/02/44/43/69/240_F_244436923_vkMe10KKKiw5bjhZeRDT05moxWcPpdmb.jpg"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"> Username = {{name}}</h5>
+                <h5 class="card-title"> Name = {{name}}</h5>
+                <h5 class="card-title"> Phoen Number = {{phone}}</h5>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
