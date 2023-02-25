@@ -1,16 +1,24 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const registerScheme = new mongoose.Schema({
+  firstname: {
+    type: String,
+    required: true,
+  },
+  lastname: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     Unique: true,
     required: true,
   },
-  phoneNumber: {
-    type: Number,
-    Unique: true,
-    // required: true,
-  },
+  // phoneNumber: {
+  //   type: Number,
+  //   Unique: true,
+  //   // required: true,
+  // },
   password: {
     type: String,
     required: true,

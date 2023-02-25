@@ -89,8 +89,10 @@ function isLoggedIn(req, res, next) {
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.get("/", (req, res) => {
+  res.render("index");
+});
+app.get("/google-login", (req, res) => {
   res.send('<a href="/auth/google">Authenticate with Google</a>');
 });
 
@@ -366,6 +368,9 @@ app.get("/register", (req, res) => {
 app.get("/resend", (req, res) => {
   res.render("resend");
 });
+app.get("/verify", (req, res) => {
+  res.render("verify");
+});
 app.post("/verify/:username", async (req, res) => {
   const username = req.params.username;
   const otp = req.body.otp;
@@ -429,13 +434,18 @@ app.patch("/shareCard/:id", async (req, res) => {
   res.send("shared");
 });
 app.get("/shared-card/:username", async (req, res) => {
-  const sharedCard = await makeCardModal.findOne({
+  const sharedCard = await makeCardModal.find({
     email: req.params.username,
   });
   res.send(
-    sharedCard.shared == "true"
+    // sharedCard
+    (sharedCard.shared = "true"
       ? sharedCard
-      : "you have not shared any card yet"
+      : // ? // ? sharedCard
+        //   async.each(sharedCard, function iteratee(card, nextCard) {
+        //     console.log("==========Started " + card + "==============");
+        //   })
+        "you have not shared any card yet")
   );
 });
 app.get("/card/:id", async (req, res) => {
@@ -457,12 +467,17 @@ app.delete("/deletecard/:id", async (req, res) => {
   }
 });
 app.post("/register", async (req, res) => {
-  sendotp(req, res);
   try {
-    if (req.body.password === req.body.cpassword) {
+    const getdata = await cardModal.findOne({ email: req.body.email });
+    if (getdata) {
+      res.send("user is already registered");
+    } else if (req.body.password === req.body.cpassword) {
+      sendotp(req, res);
       const regData = new cardModal({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
         email: req.body.email,
-        phoneNumber: req.body.number,
+        // phoneNumber: req.body.number,
         password: req.body.password,
         cpassword: req.body.cpassword,
         otp: OTP,
@@ -479,6 +494,8 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 app.post("/login", async (req, res) => {
+  // const userpassword = req.body.password;
+  // console.log(userpassword);
   try {
     const useremail = req.body.email;
     const userpassword = req.body.password;
@@ -486,7 +503,7 @@ app.post("/login", async (req, res) => {
     // console.log(userotp);
     const userData = await cardModal.findOne({ email: useremail });
     console.log(userData);
-    if (userData.password === userpassword && otp === userotp) {
+    if (userData.password === userpassword) {
       res.send("successfully login");
     } else {
       res.send("invalid email or password");
@@ -532,8 +549,8 @@ app.post("/get-user-profile", async (req, res) => {
     const userData = await cardModal.findOne({ email: useremail });
     if (userData) {
       res.render("userDetails", {
-        name: userData.email,
-        phone: userData.phoneNumber,
+        name: userData.firstname,
+        email: userData.email,
       });
     } else {
       res.send("invalid user");
